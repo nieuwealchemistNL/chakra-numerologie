@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <title>Chakra Code Profiel – nieuwealchemist.nl</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <style>
+    :root{
+      /* Logo-stijl kleuren */
+      --gold: #b39704;
+      --deepred: #a52a23;
+      --ink: #111111;
+      --paper: #ffffff;
+      --paper2: #fbfbf8;
+      --line: #e6e1d6;
+      --muted: #555555;
+
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.55;
+      font-size: 17px; /* 1 maatje groter */
+    }
+
+    body{
+      margin:0;
+      background: var(--paper);
+      color: var(--ink);
+    }
+
+    .app{
+      max-width: 1024px;
+      margin: 0 auto;
+      padding: 2rem 1.25rem 4rem;
+    }
+
+    .card{
+      background: var(--paper2);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 1.25rem 1.5rem;
+      box-shadow: 0 18px 45px rgba(0,0,0,0.08);
+    }
+
+    /* Header */
+    .brand{
+      display:flex;
+      gap: 1rem;
+      align-items:center;
+      margin-bottom: 0.75rem;
+    }
+    .brand img{
+      width: 62px;
+      height: 62px;
+      border-radius: 999px;
+      object-fit: cover;
+      border: 2px solid var(--gold);
+      background: #fff;
+    }
+    h1{
+      margin: 0;
+      color: var(--gold);
+      font-size: 2rem;
+      letter-spacing: 0.01em;
+    }
+
+    .tagline{
+      margin: 0.25rem 0 1rem;
+      color: var(--muted);
+      max-width: 72ch;
+    }
+
+    h2{
+      color: var(--gold);
+      margin-top: 1.5rem;
+      margin-bottom: 0.45rem;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 0.25rem;
+      font-size: 1.35rem;
+    }
+    h3{
+      color: var(--deepred);
+      margin-top: 1rem;
+      margin-bottom: 0.25rem;
+      font-size: 1.08rem;
+    }
+
+    p{ margin: 0.25rem 0 0.75rem; }
+
+    .input-row{
+      display:flex;
+      flex-wrap: wrap;
+      gap: 0.9rem;
+      align-items: flex-end;
+      margin-top: 0.75rem;
+      margin-bottom: 0.85rem;
+    }
+
+    label{
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    input[type="date"],
+    input[type="text"],
+    input[type="email"]{
+      padding: 0.55rem 0.7rem;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: #ffffff;
+      color: var(--ink);
+      min-width: 220px;
+      font-size: 1rem;
+    }
+
+    input:focus{
+      outline: 2px solid rgba(179,151,4,0.35);
+      outline-offset: 2px;
+      border-color: var(--gold);
+    }
+
+    .btn{
+      padding: 0.6rem 1.05rem;
+      border-radius: 999px;
+      border: 1px solid rgba(0,0,0,0.10);
+      background: linear-gradient(180deg, #d9bf2a 0%, #b39704 100%);
+      color: #111;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 12px 25px rgba(179,151,4,0.22);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      white-space: nowrap;
+    }
+    .btn:hover{ filter: brightness(1.03); transform: translateY(-1px); }
+    .btn:active{ transform: translateY(0); box-shadow: 0 8px 18px rgba(179,151,4,0.18); }
+
+    .btn.secondary{
+      background: #fff;
+      color: var(--ink);
+      border: 1px solid var(--line);
+      box-shadow: none;
+      font-weight: 600;
+    }
+
+    .small{
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+
+    .error{
+      color: #a40000;
+      font-weight: 600;
+      margin-top: 0.25rem;
+      display:none;
+    }
+
+    .pill{
+      display:inline-block;
+      padding: 0.15rem 0.6rem;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: #ffffff;
+      color: var(--ink);
+      font-size: 0.82rem;
+      margin-right: 0.35rem;
+      margin-bottom: 0.35rem;
+    }
+
+    .badge{
+      display:inline-block;
+      padding:0.12rem 0.55rem;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:#fff;
+      color: var(--muted);
+      font-size:0.72rem;
+      text-transform:uppercase;
+      letter-spacing:0.06em;
+      margin: 0.15rem 0 0.5rem;
+    }
+
+    ul{ margin: 0.25rem 0 0.9rem 1.2rem; }
+    li{ margin-bottom: 0.25rem; }
+
+    .muted{ color: var(--muted); font-size: 0.95rem; }
+
+    .section{ margin-top: 1.25rem; }
+
+    .actions-below{
+      margin-top: 0.75rem;
+      display:flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+
+    .report-footer{
+      margin-top: 1.25rem;
+      border-top: 1px solid var(--line);
+      padding-top: 0.6rem;
+      font-size: 0.9rem;
+      color: var(--muted);
+      display:flex;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    /* Print / PDF */
+    @media print{
+      body{ background:#fff; }
+      .app{ padding: 0; }
+      .app > .card:first-child{ display:none !important; }
+      #reportActions{ display:none !important; }
+      .card{
+        box-shadow:none;
+        border:none;
+        border-radius:0;
+        padding: 0;
+      }
+      h2{ border-bottom: 1px solid #ddd; }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="app">
+    <div class="card">
+      <div class="brand">
+        <!-- Upload je logo als logo.png in dezelfde repo-map -->
+        <img src="logo.png" alt="Nieuwe Alchemist logo" onerror="this.style.display='none'" />
+        <div>
+          <h1>Chakra Code Profiel</h1>
+          <p class="tagline">
+            Een uitgebreid, symbolisch rapport op basis van je geboortedatum: chakra-profiel, zielscyclus,
+            karmische lijnen, gids-symboliek, jaarthema en zielsmissie.
+          </p>
+        </div>
+      </div>
+
+      <div class="input-row">
+        <div>
+          <label for="dob">Geboortedatum</label><br/>
+          <input type="date" id="dob" />
+        </div>
+        <div>
+          <label for="name">Naam (optioneel)</label><br/>
+          <input type="text" id="name" placeholder="Bijv. Marit..." />
+        </div>
+        <div>
+          <label for="email">E-mailadres (optioneel)</label><br/>
+          <input type="email" id="email" placeholder="samenvatting naar dit adres..." />
+        </div>
+        <div>
+          <button class="btn" id="analyzeBtn" type="button">✨ Genereer DeLuxe rapport</button>
+        </div>
+      </div>
+
+      <div id="error" class="error"></div>
+
+      <p class="small">
+        Deze tool werkt volledig in je browser. Er worden geen gegevens opgeslagen of verstuurd.
+        De duiding is symbolisch en bedoeld als reflectie – niets ligt vast.
+      </p>
+    </div>
+
+    <div id="report" class="card section" style="display:none;"></div>
+
+    <div id="reportActions" class="actions-below" style="display:none;">
+      <button class="btn secondary" id="printBtn" type="button">🖨 Print / Opslaan als PDF</button>
+      <button class="btn secondary" id="emailBtn" type="button">✉ E-mail samenvatting</button>
+    </div>
+  </main>
+
+<script>
+  // ------------------------------
+  // Chakra data
+  // ------------------------------
+  const chakraMeta = {
+    1: { naam:"1 – Wortelchakra", kern:"basis, veiligheid, structuur, lichamelijke aanwezigheid",
+      kracht:"je bent nuchter, praktisch en geeft anderen een gevoel van stabiliteit.",
+      groei:"verandering kan spannend zijn; je mag vertrouwen dat nieuwe stappen ook veiligheid kunnen brengen." },
+    2: { naam:"2 – Sacraalchakra", kern:"emoties, verbinding, creativiteit, sensualiteit",
+      kracht:"je voelt veel, hebt oog voor sfeer en verbindt graag van hart tot hart.",
+      groei:"je mag leren om je eigen grenzen te voelen en te bewaken, zodat je niet overprikkeld raakt." },
+    3: { naam:"3 – Zonnevlecht", kern:"wilskracht, richting, identiteit, eigenwaarde",
+      kracht:"je hebt een natuurlijke innerlijke kracht en je kunt richting geven aan je leven.",
+      groei:"zelftwijfel en perfectionisme mogen zachter; je hoeft niet alles perfect te doen om waardig te zijn." },
+    4: { naam:"4 – Hartchakra", kern:"liefde, empathie, zachtheid, menselijkheid",
+      kracht:"je bent loyaal, warm en je hart staat open voor de mensen die je toelaat.",
+      groei:"je mag leren ontvangen in plaats van alleen geven." },
+    5: { naam:"5 – Keelchakra", kern:"communicatie, waarheid, jezelf uitspreken",
+      kracht:"je hebt een sterke innerlijke waarheid en de potentie om helder te spreken.",
+      groei:"je mag jezelf eerder laten horen, ook als het nog niet perfect geformuleerd is." },
+    6: { naam:"6 – Derde Oog", kern:"inzicht, intuïtie, overzicht, innerlijke visie",
+      kracht:"je ziet patronen, begrijpt dingen snel en hebt een sterk innerlijk kompas.",
+      groei:"je mag minder overdenken en meer vertrouwen op je eerste gevoel." },
+    7: { naam:"7 – Kruinchakra", kern:"bewustzijn, zingeving, reflectie, spirituele visie",
+      kracht:"je denkt graag diep na en zoekt naar betekenis achter ervaringen.",
+      groei:"je mag af en toe meer in het lichaam zakken en genieten van het moment." },
+    8: { naam:"8 – Krachtcentrum / Aura", kern:"verantwoordelijkheid, grenzen, leiderschap, draagkracht",
+      kracht:"je hebt een sterke ruggengraat en mensen vertrouwen op jouw stabiliteit.",
+      groei:"je mag minder dragen; niet alles en iedereen is jouw verantwoordelijkheid." },
+    9: { naam:"9 – Bronchakra", kern:"wijsheid, afronding, zielsdiepte, levenslessen",
+      kracht:"je hebt een natuurlijke diepgang en begrijpt de grote lijnen van het leven.",
+      groei:"je mag leren om de pijn van anderen niet volledig in je eigen systeem op te slaan." }
+  };
+
+  const zeroMeta = {
+    label: "0 (nul) – 0-energie",
+    kern: "gevoeligheid, open potentieel, innerlijke ruimte",
+    uitleg: "De 0 (nul) staat niet voor een chakra, maar voor open ruimte en potentieel. Ze versterkt andere cijfers en wijst op gevoeligheid en ontvankelijkheid voor energie van buitenaf."
+  };
+
+  // Oefeningen
+  const chakraExercises = {
+    1:{ titel:"Grondingsritueel voor wortelkracht",
+      korte:"Versterk je basis door dagelijks kort bewust te landen in je lichaam en in het hier en nu.",
+      stappen:[
+        "Ga zitten met beide voeten plat op de grond.",
+        "Adem drie keer diep in en uit, richting je buik.",
+        "Visualiseer een warme, stevige vloer onder je die je draagt.",
+        "Zeg rustig: “Ik ben veilig. Ik mag hier zijn.”",
+        "Voel 1 minuut lang alleen je voeten en adem."
+      ]},
+    2:{ titel:"Emotie check-in voor sacraalchakra",
+      korte:"Leer je emoties herkennen door ze dagelijks heel simpel te benoemen.",
+      stappen:[
+        "Sluit je ogen en adem rustig in en uit.",
+        "Vraag jezelf: “Welke emotie is nu het meest aanwezig?”",
+        "Kies één woord: blij, moe, gespannen, rustig, verdrietig, opgelucht…",
+        "Zeg zacht: “Het is oké dat ik me zo voel.”",
+        "Schrijf het woord eventueel in een notitieboek."
+      ]},
+    3:{ titel:"Mini-richtingoefening voor zonnevlecht",
+      korte:"Versterk je innerlijke richting met één kleine, bewuste keuze per dag.",
+      stappen:[
+        "Vraag jezelf ’s ochtends: “Wat wil ik vandaag echt?”",
+        "Kies één kleine, haalbare actie die klopt voor jou.",
+        "Schrijf die actie op of spreek hem hardop uit.",
+        "Zet een klein vinkje als je het gedaan hebt.",
+        "Evalueer ’s avonds kort: “Hoe voelde dit?”"
+      ]},
+    4:{ titel:"Hartademhaling & dankbaarheid",
+      korte:"Open je hartenergie door aandacht te geven aan dankbaarheid.",
+      stappen:[
+        "Leg je hand op je hart en adem rustig in en uit.",
+        "Denk aan één moment of persoon waar je dankbaar voor bent.",
+        "Adem dat gevoel als het ware in je borstgebied.",
+        "Zeg zacht: “Dankjewel dat dit in mijn leven is.”",
+        "Blijf nog 30 seconden bij dat gevoel."
+      ]},
+    5:{ titel:"Keelchakra Express – kleine waarheid",
+      korte:"Oefen jezelf in uitspreken met één eerlijke zin per dag.",
+      stappen:[
+        "Sta even stil bij een situatie waar je iets voelde maar zweeg.",
+        "Formuleer één eenvoudige, eerlijke zin (bijv. “Ik ben moe.”).",
+        "Oefen deze zin eerst hardop, alleen.",
+        "Kies één veilig moment om de zin zachtjes te delen met een ander.",
+        "Complimenteer jezelf dat je je stem hebt gebruikt, hoe klein ook."
+      ]},
+    6:{ titel:"Intuïtief schrijven voor derde oog",
+      korte:"Verfijn je intuïtie door korte, onbevangen schrijfmomenten.",
+      stappen:[
+        "Neem pen en papier of een notitie-app.",
+        "Zet een timer op 3 minuten.",
+        "Schrijf zonder te stoppen wat er in je opkomt, zonder te oordelen.",
+        "Lees het niet direct terug; laat het even liggen.",
+        "Bekijk later wat je opvalt aan patronen, herhalingen of ingevingen."
+      ]},
+    7:{ titel:"Bewustzijnscheck – betekenis voelen",
+      korte:"Maak bewust ruimte voor zingeving zonder te verdwalen in denken.",
+      stappen:[
+        "Ga rustig zitten en adem drie keer diep in en uit.",
+        "Vraag jezelf: “Wat was vandaag betekenisvol, hoe klein ook?”",
+        "Noem één moment en benoem waarom het betekenis had.",
+        "Laat het antwoord even stil inwerken zonder meteen te analyseren.",
+        "Sluit af met: “Ik erken dat mijn leven ook in kleine dingen zin heeft.”"
+      ]},
+    8:{ titel:"Grenzen & draagkracht scan",
+      korte:"Onderzoek dagelijks wat echt van jou is en wat niet.",
+      stappen:[
+        "Schrijf drie dingen op die je vandaag ‘moet’ doen.",
+        "Vraag per punt: “Is dit werkelijk mijn verantwoordelijkheid?”",
+        "Schrap één ding of delegeer waar mogelijk.",
+        "Zeg zacht: “Ik hoef niet alles te dragen om waardevol te zijn.”",
+        "Plan een klein herstelmoment voor jezelf in (thee, wandeling, stilte)."
+      ]},
+    9:{ titel:"Broncontact – zachte terugblik",
+      korte:"Activeer je wijsheid door kort terug te kijken op de dag.",
+      stappen:[
+        "Aan het einde van de dag: sluit je ogen en adem rustig.",
+        "Vraag: “Wat heeft deze dag mij willen leren?”",
+        "Laat spontaan een beeld, gevoel of gedachte opkomen.",
+        "Schrijf één zin op als boodschap aan jezelf.",
+        "Sluit af met: “Ik vertrouw dat ik mag leren in mijn eigen tempo.”"
+      ]}
+  };
+
+  // ------------------------------
+  // Helpers
+  // ------------------------------
+  function digitSum(n){
+    let s = n;
+    while(s > 9){
+      s = String(s).split("").map(d=>parseInt(d,10)).reduce((a,b)=>a+b,0);
+    }
+    return s;
+  }
+
+  function formatDateDisplay(isoStr){
+    const [y,m,d] = isoStr.split("-");
+    return `${d}-${m}-${y}`;
+  }
+
+  function analyzeDate(isoDate, name){
+    const clean = isoDate.replace(/\D/g,"");
+    const digits = clean.split("").map(d=>parseInt(d,10));
+    if(digits.length < 6) throw new Error("Ongeldige geboortedatum.");
+
+    const firstSum = digits.reduce((a,b)=>a+b,0);
+    const baseChakra = digitSum(firstSum);
+
+    const counts = Array(10).fill(0);
+    digits.forEach(d=>counts[d]++);
+
+    const firstSumStr = String(firstSum);
+    const boven = firstSumStr.length > 1 ? parseInt(firstSumStr[0],10) : baseChakra;
+    const onder = firstSumStr.length > 1 ? parseInt(firstSumStr[1],10) : null;
+
+    return {
+      name,
+      isoDate,
+      dateDisplay: formatDateDisplay(isoDate),
+      digits,
+      firstSum,
+      baseChakra,
+      counts,
+      boven,
+      onder
+    };
+  }
+
+  function getAgeYears(isoDate){
+    const [y,m,d] = isoDate.split("-").map(n=>parseInt(n,10));
+    const birth = new Date(y,m-1,d);
+    const today = new Date();
+    let age = today.getFullYear() - birth.getFullYear();
+    const md = today.getMonth() - birth.getMonth();
+    if(md < 0 || (md===0 && today.getDate() < birth.getDate())) age--;
+    return age;
+  }
+
+  function getSoulCycle(isoDate){
+    const age = getAgeYears(isoDate);
+    const cycleIndex = Math.floor(age/7)+1;
+    const startAge = (cycleIndex-1)*7;
+    const endAge = startAge+6;
+    const themes = {
+      1:"Leren aarden, basisveiligheid en eerste indrukken van de wereld.",
+      2:"Emotionele ontwikkeling, spel, relationele eerste ervaringen.",
+      3:"Identiteit, eigen wil, grenzen en ‘ik’ tegenover de ander.",
+      4:"Hartopening, vriendschappen, groepservaringen en empathie.",
+      5:"Stem, expressie, jezelf meer uitspreken en laten zien.",
+      6:"Inzicht, studie, innerlijke beelden en intuïtie.",
+      7:"Bewustwording, zoeken naar zin, eerste grote levensvragen.",
+      8:"Draagkracht, verantwoordelijkheid, werk en volwassen keuzes.",
+      9:"Afronding van oude patronen, verdiepen en loslaten."
+    };
+    const desc = themes[cycleIndex] || "Een verdiepende cyclus waarin eerdere levensthema’s zich op een nieuw niveau laten zien.";
+    return { age, cycleIndex, startAge, endAge, desc };
+  }
+
+  function getLifePhase(isoDate){
+    const age = getAgeYears(isoDate);
+    if(age < 28){
+      return { fase:"Versterkingsfase", uitleg:"Je bouwt fundering: lichaam, identiteit, basisveiligheid en eerste levenskeuzes. Je probeert uit, valt en staat weer op." };
+    } else if(age < 56){
+      return { fase:"Ontwakingsfase", uitleg:"De aandacht verschuift van alleen ‘doen’ naar ‘zijn’. Je gaat steeds scherper voelen wat klopt voor jouw ziel en energie." };
+    } else {
+      return { fase:"Meesterfase", uitleg:"Ervaring wordt wijsheid. Je leeft dichter bij je essentie en deelt vaker (bewust of vanzelf) wat je hebt doorleefd." };
+    }
+  }
+
+  function getPersonalYear(isoDate){
+    const [y,m,d] = isoDate.split("-").map(n=>parseInt(n,10));
+    const currentYear = new Date().getFullYear();
+    const yearDigitsSum = String(currentYear).split("").map(n=>parseInt(n,10)).reduce((a,b)=>a+b,0);
+    const yearNum = digitSum(d + m + yearDigitsSum);
+
+    const themes = {
+      1:"Nieuw begin, zaaien, initiatief nemen, keuzes maken die echt bij jou horen.",
+      2:"Verbinding, relaties, samenwerken, geduld en emotionele verfijning.",
+      3:"Expressie, creativiteit, jezelf laten zien, spelen en experimenteren.",
+      4:"Structuur, fundament, bouwen aan iets dat langer mee mag gaan.",
+      5:"Verandering, beweging, vrijheid, flexibiliteit en wendingen.",
+      6:"Zorg, familie, hartzaken, verantwoordelijkheid in relaties en thuis.",
+      7:"Verstilling, innerlijk onderzoek, verdieping en studie.",
+      8:"Oogst, leiderschap, grenzen, materiële thema’s en impact.",
+      9:"Loslaten, afronden, vergeving, opruimen en voorbereiding op een nieuwe cyclus."
+    };
+
+    return { currentYear, yearNum, desc: themes[yearNum] || "Een jaar van innerlijke verschuivingen en groei." };
+  }
+
+  // ------------------------------
+  // Rapport onderdelen
+  // ------------------------------
+  function describeBaseChakra(base){
+    const meta = chakraMeta[base];
+    if(!meta) return "";
+    return `
+      <h2>1. Basischakra (kernenergie)</h2>
+      <div class="badge">KERN</div>
+      <p><strong>Basischakra:</strong> ${meta.naam}</p>
+      <p><strong>Kernenergie:</strong> ${meta.kern}</p>
+      <p>Dit betekent dat jouw diepste energie zich richt op deze thema’s. Dit kleurt je persoonlijkheid, je keuzes en de manier waarop je in het leven staat.</p>
+    `;
+  }
+
+  function describeFirstSum(firstSum, boven, onder){
+    const bovenTxt = chakraMeta[boven] ? chakraMeta[boven].kern : "";
+    let onderLabel = "";
+    let onderTxt = "";
+
+    if(onder === null){
+      onderLabel = "Onderstroom";
+      onderTxt = "n.v.t.";
+    } else if(onder === 0){
+      onderLabel = "Onderstroom (0 / nul)";
+      onderTxt = `${zeroMeta.kern} – ${zeroMeta.uitleg}`;
+    } else {
+      onderLabel = `Onderstroom (${onder})`;
+      onderTxt = chakraMeta[onder] ? chakraMeta[onder].kern : "n.v.t.";
+    }
+
+    return `
+      <h2>2. Eerste som (dubbele energie)</h2>
+      <div class="badge">LEVENSLADING</div>
+      <p><strong>Eerste som:</strong> ${firstSum}</p>
+      <p><strong>Bovenstroom (${boven}):</strong> ${bovenTxt}</p>
+      <p><strong>${onderLabel}:</strong> ${onderTxt}</p>
+      <p class="muted">De bovenstroom laat zien welk thema het meest zichtbaar is. De onderstroom toont wat onder de oppervlakte mee beweegt.</p>
+    `;
+  }
+
+  function describeDistribution(counts){
+    let pills = "";
+    for(let i=1;i<=9;i++){
+      pills += `<span class="pill">${i}: ${counts[i]}×</span>`;
+    }
+    const zeroPill = `<span class="pill">0 (nul): ${counts[0]}×</span>`;
+
+    const sterke=[], stabiel=[], ontbreekt=[];
+    for(let i=1;i<=9;i++){
+      if(counts[i] >= 2) sterke.push(i);
+      else if(counts[i] === 1) stabiel.push(i);
+      else ontbreekt.push(i);
+    }
+
+    let html = `
+      <h2>3. Chakra-verdeling (energiekaart)</h2>
+      <div class="badge">OVERZICHT</div>
+      <p>${pills} ${zeroPill}</p>
+    `;
+
+    if(sterke.length) html += `<p><strong>Sterk aanwezig:</strong> ${sterke.join(", ")}</p>`;
+    if(stabiel.length) html += `<p><strong>Stabiel aanwezig:</strong> ${stabiel.join(", ")}</p>`;
+    if(ontbreekt.length) html += `<p><strong>Ontbrekend:</strong> ${ontbreekt.join(", ")}</p>`;
+    if(counts[0] > 0) html += `<p><strong>0 (nul) – 0-energie:</strong> ${zeroMeta.uitleg}</p>`;
+
+    return { html, ontbreekt };
+  }
+
+  function describeStrengths(counts, base){
+    const bullets = [];
+
+    for(let i=1;i<=9;i++){
+      if(counts[i] >= 2){
+        bullets.push(`<strong>${chakraMeta[i].naam}:</strong> ${chakraMeta[i].kracht}`);
+      }
+    }
+    bullets.push(`<strong>Basischakra:</strong> ${chakraMeta[base].kracht}`);
+
+    if(counts[0] >= 2){
+      bullets.push(`<strong>0 (nul) – 0-energie:</strong> je bent gevoelig voor sfeer en signalen. Gronding en rust helpen je om dit als kracht te gebruiken.`);
+    } else if(counts[0] === 1){
+      bullets.push(`<strong>0 (nul) – 0-energie:</strong> je hebt een subtiele antenne voor intuïtieve signalen.`);
+    }
+
+    return `
+      <h2>4. Krachten & talenten</h2>
+      <div class="badge">KRACHTVELD</div>
+      <ul>${bullets.map(b=>`<li>${b}</li>`).join("")}</ul>
+    `;
+  }
+
+  function describeShadows(counts){
+    const bullets = [];
+    for(let i=1;i<=9;i++){
+      if(counts[i] === 0){
+        // FIX: groeiveld (niet groeivelden)
+        bullets.push(`<strong>${chakraMeta[i].naam}:</strong> ${chakraMeta[i].groei}`);
+      }
+    }
+    if(counts[8] >= 2) bullets.push(`<strong>Veel 8-energie:</strong> je mag oefenen met minder dragen en vaker hulp aannemen.`);
+    if(counts[0] >= 3) bullets.push(`<strong>Veel 0 (nul)-energie:</strong> investeer extra in rust, grenzen en gronding.`);
+
+    return `
+      <h2>5. Schaduwkanten & groeipunten</h2>
+      <div class="badge">GROEI</div>
+      <p>Schaduw is geen fout, maar een uitnodiging tot bewustwording.</p>
+      <ul>${(bullets.length ? bullets : ["Je groei ligt vooral in balans: geven/ontvangen, denken/voelen, spreken/stilte."]).map(b=>`<li>${b}</li>`).join("")}</ul>
+    `;
+  }
+
+  function describeChakraExercises(counts){
+    const weak = [];
+    for(let i=1;i<=9;i++){
+      if(counts[i] <= 1) weak.push(i);
+    }
+
+    const sections = weak.map(num=>{
+      const meta = chakraMeta[num];
+      const ex = chakraExercises[num];
+      if(!meta || !ex) return "";
+      return `
+        <h3>${meta.naam}</h3>
+        <p><strong>Waarom dit chakra een groeiveld is:</strong> ${meta.groei}</p>
+        <p><strong>Oefening:</strong> ${ex.titel}</p>
+        <p>${ex.korte}</p>
+        <ul>${ex.stappen.map(s=>`<li>${s}</li>`).join("")}</ul>
+      `;
+    }).join("");
+
+    return `
+      <h2>6. Chakra-oefeningen voor ontwikkeling</h2>
+      <div class="badge">PRAKTIJK</div>
+      <p>Hieronder vind je concrete, zachte oefeningen voor chakra’s die minder sterk aanwezig zijn in je geboortedatum. Zie het als uitnodiging, niet als verplichting.</p>
+      ${sections || "<p class='muted'>Je hebt een vrij gebalanceerde verdeling. Kies intuïtief één oefening en herhaal die een week lang.</p>"}
+    `;
+  }
+
+  function describeSoulSections(isoDate){
+    const cycle = getSoulCycle(isoDate);
+    const phase = getLifePhase(isoDate);
+
+    return `
+      <h2>7. 7-jarige zielscyclus & levensfasen</h2>
+      <div class="badge">ZIELSCYCLUS</div>
+      <p><strong>Leeftijd (benadering):</strong> ${cycle.age} jaar</p>
+      <p><strong>Huidige 7-jarige cyclus:</strong> cyclus ${cycle.cycleIndex} (ongeveer ${cycle.startAge} t/m ${cycle.endAge})</p>
+      <p><strong>Thema:</strong> ${cycle.desc}</p>
+
+      <h3>Levensfase</h3>
+      <p><strong>${phase.fase}:</strong> ${phase.uitleg}</p>
+      <p class="muted">Symbolisch hulpmiddel: niet strak, wel richtinggevend.</p>
+    `;
+  }
+
+  function describeGuides(counts, base){
+    const strong = [];
+    for(let i=1;i<=9;i++){
+      if(counts[i] >= 2) strong.push(i);
+    }
+    const dom = strong.length ? strong : [base];
+
+    const archetypes = new Set();
+    const animals = new Set();
+    const energies = [];
+
+    dom.forEach(num=>{
+      switch(num){
+        case 1: archetypes.add("De Beschermer / De Bouwer"); animals.add("Beer"); energies.push("Aardend, beschermend, praktisch."); break;
+        case 2: archetypes.add("De Verbinder / De Maanbewaker"); animals.add("Dolfijn"); energies.push("Waterig, gevoelig, relationeel."); break;
+        case 3: archetypes.add("De Krijger van Licht"); animals.add("Leeuw"); energies.push("Vurig, richtinggevend, waardigheid."); break;
+        case 4: archetypes.add("De Hartwachter"); animals.add("Hert"); energies.push("Zacht, verbindend, compassie."); break;
+        case 5: archetypes.add("De Boodschapper"); animals.add("Vogel"); energies.push("Helder, expressief, waarheid."); break;
+        case 6: archetypes.add("De Ziener"); animals.add("Uil"); energies.push("Intuïtief, inzichtgevend, patroonherkenning."); break;
+        case 7: archetypes.add("De Wijze"); animals.add("Raaf"); energies.push("Spiritueel, contemplatief, betekenis."); break;
+        case 8: archetypes.add("De Hoeder van de Poort"); animals.add("Wolf"); energies.push("Grenzen, leiderschap, integriteit."); break;
+        case 9: archetypes.add("De Oude Ziel"); animals.add("Vlinder"); energies.push("Transformatie, afronding, wijsheid."); break;
+      }
+    });
+
+    return `
+      <h2>8. Gids-symboliek, archetypen & zielsdieren</h2>
+      <div class="badge">SYMBOLIEK</div>
+      <p><strong>Archetypen:</strong> ${[...archetypes].join(", ")}</p>
+      <p><strong>Zielsdieren (symbolisch):</strong> ${[...animals].join(", ")}</p>
+      <p><strong>Energie:</strong> ${energies.join(" ")}</p>
+      <p class="muted">Symbolisch bedoeld: neem mee wat resoneert, laat los wat niet past.</p>
+    `;
+  }
+
+  function describePersonalYear(isoDate){
+    const py = getPersonalYear(isoDate);
+    return `
+      <h2>9. Persoonlijk jaarthema</h2>
+      <div class="badge">JAAR</div>
+      <p><strong>Jaar:</strong> ${py.currentYear}</p>
+      <p><strong>Persoonlijk jaargetal:</strong> ${py.yearNum}</p>
+      <p><strong>Thema:</strong> ${py.desc}</p>
+      <p class="muted">Geen voorspelling, wel een ondertoon om je keuzes en groei op af te stemmen.</p>
+    `;
+  }
+
+  function describeSoulMission(base, counts){
+    const meta = chakraMeta[base];
+    const strong = [];
+    for(let i=1;i<=9;i++){
+      if(counts[i] >= 2) strong.push(i);
+    }
+    const missie = [];
+    missie.push(`Je kernopdracht ligt in het belichamen van de kwaliteiten van <strong>${meta.naam}</strong>: ${meta.kern}.`);
+
+    if(strong.includes(8)) missie.push("Je ziel wil leren dragen zonder jezelf te verliezen: kracht met grenzen, leiderschap met integriteit.");
+    if(strong.includes(4)) missie.push("Je hartlijn is sterk: liefde, verbinding en zachtheid brengen waar het harder is geweest.");
+    if(strong.includes(7) || strong.includes(9)) missie.push("Er is een wijsheidslijn: betekenis geven aan ervaringen en (bewust of onbewust) anderen inspireren.");
+
+    return `
+      <h2>10. Zielsmissie</h2>
+      <div class="badge">ESSENTIE</div>
+      <p>${missie.join(" ")}</p>
+      <p class="muted">Zielsmissie is geen taaklijst, maar een richting: hoe jij aanwezig bent in het leven.</p>
+    `;
+  }
+
+  function buildReport(data){
+    const { name, dateDisplay, digits, firstSum, baseChakra, counts, boven, onder, isoDate } = data;
+    const titleName = name && name.trim() ? name.trim() : "—";
+
+    const dist = describeDistribution(counts);
+
+    return `
+      <h2>Overzicht</h2>
+      <div class="badge">PROFIEL</div>
+      <p><strong>Naam:</strong> ${titleName}</p>
+      <p><strong>Geboortedatum:</strong> ${dateDisplay}</p>
+      <p><strong>Cijfers:</strong> ${digits.join(", ")}</p>
+      <p><strong>Eerste som:</strong> ${firstSum}</p>
+      <p><strong>Basischakra:</strong> ${baseChakra}</p>
+
+      ${describeBaseChakra(baseChakra)}
+      ${describeFirstSum(firstSum, boven, onder)}
+      ${dist.html}
+      ${describeStrengths(counts, baseChakra)}
+      ${describeShadows(counts)}
+      ${describeChakraExercises(counts)}
+      ${describeSoulSections(isoDate)}
+      ${describeGuides(counts, baseChakra)}
+      ${describePersonalYear(isoDate)}
+      ${describeSoulMission(baseChakra, counts)}
+
+      <div class="report-footer">
+        <div>Gemaakt door <strong>nieuwealchemist.nl</strong></div>
+        <div class="muted">Rapport gegenereerd in de browser</div>
+      </div>
+    `;
+  }
+
+  function buildEmailSummary(data){
+    const titleName = data.name && data.name.trim() ? data.name.trim() : "—";
+    const py = getPersonalYear(data.isoDate);
+    return `
+Chakra Code Profiel – Samenvatting
+
+Naam: ${titleName}
+Geboortedatum: ${data.dateDisplay}
+Eerste som: ${data.firstSum}
+Basischakra: ${data.baseChakra}
+Persoonlijk jaargetal (${py.currentYear}): ${py.yearNum}
+
+Gemaakt door nieuwealchemist.nl
+    `.trim();
+  }
+
+  // ------------------------------
+  // UI
+  // ------------------------------
+  const btn = document.getElementById("analyzeBtn");
+  const dobInput = document.getElementById("dob");
+  const nameInput = document.getElementById("name");
+  const emailInput = document.getElementById("email");
+  const errorEl = document.getElementById("error");
+  const reportEl = document.getElementById("report");
+  const reportActions = document.getElementById("reportActions");
+  const printBtn = document.getElementById("printBtn");
+  const emailBtn = document.getElementById("emailBtn");
+
+  let lastAnalysis = null;
+
+  function showError(msg){
+    errorEl.textContent = msg;
+    errorEl.style.display = "block";
+  }
+  function clearError(){
+    errorEl.textContent = "";
+    errorEl.style.display = "none";
+  }
+
+  btn.addEventListener("click", ()=>{
+    clearError();
+    reportEl.style.display = "none";
+    reportEl.innerHTML = "";
+    reportActions.style.display = "none";
+    lastAnalysis = null;
+
+    const isoDate = dobInput.value;
+    if(!isoDate) return showError("Vul eerst een geldige geboortedatum in.");
+
+    try{
+      const data = analyzeDate(isoDate, nameInput.value);
+      const html = buildReport(data);
+      reportEl.innerHTML = html;
+      reportEl.style.display = "block";
+      reportActions.style.display = "flex";
+      lastAnalysis = data;
+      window.scrollTo({ top: reportEl.offsetTop - 10, behavior: "smooth" });
+    } catch(e){
+      console.error(e);
+      showError("Er ging iets mis bij het berekenen. Controleer de datum.");
+    }
+  });
+
+  printBtn.addEventListener("click", ()=>{
+    if(!reportEl.innerHTML.trim()) return;
+    window.print();
+  });
+
+  emailBtn.addEventListener("click", ()=>{
+    if(!lastAnalysis) return showError("Genereer eerst een rapport voordat je e-mailt.");
+    const to = emailInput.value.trim();
+    if(!to) return showError("Vul eerst een e-mailadres in.");
+
+    clearError();
+
+    const subject = "Chakra Code Profiel – Samenvatting";
+    const body = buildEmailSummary(lastAnalysis);
+    const mailto = `mailto:${encodeURIComponent(to)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.location.href = mailto;
+  });
+</script>
+</body>
+</html>
